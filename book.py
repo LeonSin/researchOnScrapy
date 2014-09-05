@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-    
+
 class Book(self):
 	""" A entity class : book"""
 	def setTitle(self.title):
