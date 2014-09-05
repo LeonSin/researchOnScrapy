@@ -29,6 +29,6 @@ if __name__ == '__main__':
 	if(bookListInfo):
 		print 'bookListInfo is not null %d' % len(bookListInfo)
 		for bookInfo in bookListInfo:
-			bookURL = re.match(r'http://book\.douban\.com/subject/\d+/', bookInfo)
-			bookURLList.append(bookURL)
+			bookURL = re.search(r'http://book\.douban\.com/subject/\d+/', bookInfo)
+			bookURLList.append(bookURL.group())
 	print bookURLList
