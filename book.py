@@ -1,4 +1,4 @@
-class book(self):
+class Book(self):
 	""" A entity class : book"""
 	def setTitle(self.title):
 		self.title = title 
