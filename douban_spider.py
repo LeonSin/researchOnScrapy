@@ -13,6 +13,15 @@ class BookSearch:
 		bookList = re.findall('<li class="subject-item">(.*?)</li>', response_page, re.S)
 		return bookList
 	
+	def getBookURLList(self, bookList):
+		bookURLList = []
+		if(bookList):
+			for bookInfo in bookList:
+				bookURL = re.search(r'http://book\.douban\.com/subject/\d+/', bookInfo)
+				# get the unicode String
+				bookURLList.append(bookURL.group())
+		return bookURLList
+
 	def getBookDetailInfo(self, bookURL):
 		bookInfoResponse = urllib2.urlopen(bookURL)
 		bookDetailInfoPage = bookInfoResponse.read().decode("utf-8")
@@ -35,14 +44,6 @@ with open('search_python_book.html','w+') as f:
 if __name__ == '__main__':
 	bookSearch = BookSearch()
 	bookListInfo = bookSearch.getBookList()
-	print bookListInfo
-	bookURLList = []
-	if(bookListInfo):
-		print 'bookListInfo is not null %d' % len(bookListInfo)
-		for bookInfo in bookListInfo:
-			bookURL = re.search(r'http://book\.douban\.com/subject/\d+/', bookInfo)
-			# get the unicode String
-			bookURLList.append(bookURL.group())
-	
+	bookURLList = bookSearch.getBookURLList(bookListInfo)
 	for bookURL in bookURLList:
 		bookSearch.getBookDetailInfo(bookURL)
